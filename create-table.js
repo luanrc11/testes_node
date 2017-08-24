@@ -23,13 +23,6 @@ const connection = mysql.createConnection({
         });
   }
 
-  connection.connect(function(err){
-    if(err) return console.log(err);
-    console.log('conectou!');
-    createTable(connection);
-    addRows(connection);
-  })
-
   function addRows(conn){
     const sql = "INSERT INTO Clientes(Nome,CPF) VALUES ?";
     const values = [
@@ -43,3 +36,11 @@ const connection = mysql.createConnection({
             conn.end();//fecha a conexão
         });
   }
+
+  connection.connect(function(err){
+    if(err) return console.log(err);
+    console.log('conectou!');
+    createTable(connection);
+    addRows(connection);
+  })
+
