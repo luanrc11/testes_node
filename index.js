@@ -11,9 +11,15 @@ app.use(bodyParser.json());
 //definindo as rotas
 const router = express.Router();
 router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
-router.get('/clientes', (req, res) =>{
-    execSQLQuery('SELECT * FROM Clientes', res);
+
+//tras todos clientes e por parametro id
+router.get('/clientes/:id?', (req, res) =>{
+    let filter = '';
+    if(req.params.id) filter = ' WHERE ID=' + parseInt(req.params.id);
+    execSQLQuery('SELECT * FROM Clientes' + filter, res);
 })
+
+
 app.use('/', router);
 
 
