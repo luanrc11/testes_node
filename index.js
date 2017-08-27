@@ -18,10 +18,7 @@ router.get('/clientes/:id?', (req, res) =>{
     if(req.params.id) filter = ' WHERE ID=' + parseInt(req.params.id);
     execSQLQuery('SELECT * FROM Clientes' + filter, res);
 })
-
-
 app.use('/', router);
-
 
 //inicia o servidor
 app.listen(port);

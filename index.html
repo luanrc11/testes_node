@@ -1,16 +1,73 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html ng-app="clientes">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/clientes.module.js"></script>
+    <script src="js/clientes.controller.js"></script>
 
-    <script src="/node_modules/angular/angular.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <h1>Hello, world!</h1>
+  <body ng-controller="clientesCtrl">
+
+    <div class = "container">
+      <h1>Clientes</h1>
+      <div class="lista-clientes" ng-repeat="cliente in listaClientes" style="float: left; padding-left: 50px">        
+        <br>  <img ng-src="{{ cliente.img }}" width="150px" height="150px">
+        <ul>
+            <li >
+              Nome: {{ cliente.nome }}
+            </li>
+            <li >
+              Idade: {{ cliente.idade }}
+            </li>
+            <li >
+              E-mail: {{ cliente.email }}
+            </li>
+        </ul>
+        <button title="Excluir" ng-click="removerCliente(cliente.id)">Excluir {{ cliente.nome }}  </button><br>
+      </div>
+    </div>
+
+    <div class="container clear" >
+      <div class="adicionar-cliente">
+        <form class="form-horizontal" ng-submit="adicionarCliente()">
+          <h1>Adicionar Cliente</h1>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="nome">Nome:</label>
+            <div class="col-sm-10">
+              <input type="text" id="nome" name="nome" class="form-control" ng-model="novoCliente.nome">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="idade">Idade:</label>
+            <div class="col-sm-10">
+              <input type="text" id="idade" name="idade" class="form-control" ng-model="novoCliente.idade"> 
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">E-mail:</label>
+            <div class="col-sm-10">
+              <input type="text" id="email" name="email" class="form-control" ng-model="novoCliente.email"> 
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="foto">Foto:</label>
+            <div class="col-sm-10">
+              <input type="text" id="foto" name="img" class="form-control" ng-model="novoCliente.img"> 
+            </div>
+          </div>
+          <div class="form-group">        
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Adicionar</button>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </div>
+
   </body>
 </html>

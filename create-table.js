@@ -26,9 +26,9 @@ const connection = mysql.createConnection({
   function addRows(conn){
     const sql = "INSERT INTO Clientes(Nome,CPF) VALUES ?";
     const values = [
-          ['teste1', '12345678901'],
-          ['teste1', '09876543210'],
-          ['teste3', '12312312399']
+          ['Luan', '12345678901'],
+          ['Lucas', '09876543210'],
+          ['Mayara', '12312312399']
         ];
     conn.query(sql, [values], function (error, results, fields){
             if(error) return console.log(error);

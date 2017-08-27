@@ -1,0 +1,20 @@
+.container {
+	width: 850px;
+	max-width: 90vw;
+	margin: 0 auto;
+}
+
+.lista-clientes {
+	position: relative;
+    display: block;
+	background-color: #FFF;
+	margin-bottom: 50px;
+	padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    float: left;
+}
+
+
+.clear {
+    clear: both;
+}
