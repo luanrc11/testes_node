@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="js/clientes.module.js"></script>
     <script src="js/clientes.controller.js"></script>
+    <script src="js/clientes.factory.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -15,14 +16,14 @@
 
     <div class = "container">
       <h1>Clientes</h1>
-      <div class="lista-clientes" ng-repeat="cliente in listaClientes" style="float: left; padding-left: 50px">        
+      <div class="lista-clientes" ng-repeat="cliente in lista" style="float: left; padding-left: 50px">        
         <br>  <img ng-src="{{ cliente.img }}" width="150px" height="150px">
         <ul>
             <li >
               Nome: {{ cliente.nome }}
             </li>
             <li >
-              Idade: {{ cliente.idade }}
+              Id: {{ cliente.id }}
             </li>
             <li >
               E-mail: {{ cliente.email }}
@@ -30,6 +31,7 @@
         </ul>
         <button title="Excluir" ng-click="removerCliente(cliente.id)">Excluir {{ cliente.nome }}  </button><br>
       </div>
+        
     </div>
 
     <div class="container clear" >

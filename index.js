@@ -8,6 +8,12 @@ const mysql = require('mysql');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 //definindo as rotas
 const router = express.Router();
 router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
@@ -15,9 +21,10 @@ router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
 //tras todos clientes e por parametro id
 router.get('/clientes/:id?', (req, res) =>{
     let filter = '';
-    if(req.params.id) filter = ' WHERE ID=' + parseInt(req.params.id);
-    execSQLQuery('SELECT * FROM Clientes' + filter, res);
+    if(req.params.id) filter = ' WHERE id=' + parseInt(req.params.id);
+    execSQLQuery('SELECT * FROM clientes' + filter, res);
 })
+
 app.use('/', router);
 
 //inicia o servidor

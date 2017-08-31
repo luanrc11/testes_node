@@ -1,2 +1,4 @@
 angular
-    .module("clientes", []);
+    .module("clientes", [])
+
+    .value('api', 'http://localhost:3000/clientes/');

@@ -1,5 +1,5 @@
 angular.module("clientes").controller("clientesCtrl", 
-    function($scope){
+    function($scope, ClientesFactory){
 
         $scope.listaClientes = [
             {
@@ -18,6 +18,11 @@ angular.module("clientes").controller("clientesCtrl",
             },
             
         ];
+
+        ClientesFactory.read().then(function(data){
+            $scope.lista = data.data;
+            console.log(data.data);
+        });        
 
         $scope.novoCliente = {};
 
