@@ -9,8 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   next();
 });
 
@@ -24,6 +25,14 @@ router.get('/clientes/:id?', (req, res) =>{
     if(req.params.id) filter = ' WHERE id=' + parseInt(req.params.id);
     execSQLQuery('SELECT * FROM clientes' + filter, res);
 })
+
+router.post('/clientes', (req, res) =>{
+  const nome = req.body.nome.substring(0,150);
+  const cpf = req.body.cpf.substring(0,11);
+  const email = req.body.email.substring(0,100);
+  const img = req.body.img.substring(0,500);
+  execSQLQuery(`INSERT INTO Clientes(Nome, CPF, email, img) VALUES('${nome}','${cpf}','${email}','${img}')`, res);
+});
 
 app.use('/', router);
 

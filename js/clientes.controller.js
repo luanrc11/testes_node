@@ -1,38 +1,33 @@
 angular.module("clientes").controller("clientesCtrl", 
     function($scope, ClientesFactory){
 
-        $scope.listaClientes = [
-            {
-                id: "1234",
-                nome: "Luan",
-                idade: "22",
-                email: "luan@live.com",
-                img: "https://scontent.fcgh2-1.fna.fbcdn.net/v/t1.0-1/p160x160/15032085_995711957201060_7270760324422768928_n.jpg?oh=799cb8c4338f6dd3e1c0410fafd08ba5&oe=5A29DBE5"
-            },
-            {
-                id: "1324",
-                nome: "Lucas",
-                idade: "22",
-                email: "lucas@live.com",
-                img: "https://scontent.fcgh2-1.fna.fbcdn.net/v/t1.0-1/p160x160/17904310_1479790548697713_1667301781728304068_n.jpg?oh=3065df288486ab52a281da9cdbd07f39&oe=5A26167E"
-            },
-            
-        ];
+        $scope.listaClientes = [];
 
-        ClientesFactory.read().then(function(data){
-            $scope.lista = data.data;
-            console.log(data.data);
-        });        
+        var carregarClientes = function(){
+            ClientesFactory.listar().then(function(clientes){
+                $scope.listaClientes = clientes;
+            });
+        }
+
+        ClientesFactory.listar().then(function(clientes){
+            $scope.listaClientes = clientes;
+        })  
 
         $scope.novoCliente = {};
 
         $scope.adicionarCliente = function(){
-            var cliente = angular.copy($scope.novoCliente);
-            cliente.id = Date.now();
-            $scope.listaClientes.push(cliente);
+            var cliente = {
+                id: Date.now() + "",
+                nome: $scope.novoCliente.nome,
+                cpf: $scope.novoCliente.cpf,
+                email: $scope.novoCliente.email,
+                img: $scope.novoCliente.img
+            };
 
-            $scope.novoCliente = {};
-        }
+            //console.log(cliente);
+
+            ClientesFactory.inserir(cliente).then(carregarClientes);
+        }       
 
         $scope.removerCliente = function(id){
             angular.forEach($scope.listaClientes, function(cliente, i){
@@ -41,5 +36,7 @@ angular.module("clientes").controller("clientesCtrl",
                 }
             })
         }
+
+        carregarClientes();
         
     })
